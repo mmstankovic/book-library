@@ -28,6 +28,8 @@ const BookInfoForm = ({formData, setFormData}) => {
         return () => clearTimeout(bookIdentifier)
     }, [enteredName, enteredLibraryId, enteredTitle, enteredAuthor])
 
+    console.log('Book re-render')
+
     return (
         <>
             <Grid item xs={12} sm={6}>

@@ -9,11 +9,12 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { useContext } from 'react';
 import LibraryContext from '../../store/library-context';
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined'
+import cosmicImg from '../../images/cosmic.jpeg'
 
 const MyDrawer = ({ handleDrawerToggle }) => {
     const bookLibraryCtx = useContext(LibraryContext)
     return (
-        <Box sx={{ height: '100vh', backgroundImage: `url('https://img.freepik.com/free-vector/color-seamless-space-pattern_102902-2360.jpg?w=1380&t=st=1700062051~exp=1700062651~hmac=4bf54c695937839a0fafad68de400e4ffaf628845d7854ad01bfa2235e6bb26d')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+        <Box sx={{ height: '100vh', backgroundImage: `url(${cosmicImg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
             <Box onClick={handleDrawerToggle} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
                 <Link style={{ flexGrow: 1 }} underline='none' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, p: 1.5 }}>
                     <LocalLibraryOutlinedIcon color='warning' fontSize='large' />

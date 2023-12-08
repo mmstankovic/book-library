@@ -10,11 +10,12 @@ const TopAuthorsPage = () => {
     const [httpError, setHttpError] = useState(false)
     const bookLibraryCtx = useContext(LibraryContext)
     const { fetchAllBooks } = bookLibraryCtx
-    
+
     useEffect(() => {
         const fetchTopAuthors = async () => {
+            setHttpError(null)
             setIsLoading(true)
-            setHttpError(false)
+
             const response = await fetch('https://www.googleapis.com/books/v1/volumes?q=subject:authors&maxResults=40')
             if (!response.ok) {
                 throw new Error('Failed to fetch top authors !')
@@ -24,6 +25,7 @@ const TopAuthorsPage = () => {
             let filteredBooks = []
             for (let i = 0; i < data.items.length; i++) {
                 let noRepeat = true
+                if (data.items[i].volumeInfo.authors === undefined) continue //IS THIS PATTERN?
                 for (let u = 0; u < filteredBooks.length; u++) {
                     if (data.items[i].volumeInfo.authors[0] === filteredBooks[u].volumeInfo.authors[0]) {
                         noRepeat = false

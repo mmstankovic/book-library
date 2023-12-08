@@ -6,10 +6,10 @@ import useInput from '../../../hooks/useInput'
 const isNotEmpty = value => value.trim().length !== 0
 const isFive = value => value.trim().length === 5
 
-const AdressForm = ({setFormData, formData}) => {
-    const {enteredValue: enteredCity, hasError: cityInputHasError, valueChangeHandler: cityChangeHandler, inputBlurHandler: cityInputBlurHandler} = useInput(isNotEmpty)
-    const {enteredValue: enteredProvince, valueChangeHandler: provinceChangeHandler} = useInput(isNotEmpty)
-    const {enteredValue: enteredPostalCode, hasError: postalCodeInputHasError, valueChangeHandler: postalCodeChangeHandler, inputBlurHandler: postalCodeInputBlurHandler} = useInput(isFive)
+const AdressForm = ({ setFormData, formData }) => {
+    const { enteredValue: enteredCity, hasError: cityInputHasError, valueChangeHandler: cityChangeHandler, inputBlurHandler: cityInputBlurHandler } = useInput(isNotEmpty)
+    const { enteredValue: enteredProvince, valueChangeHandler: provinceChangeHandler } = useInput(isNotEmpty)
+    const { enteredValue: enteredPostalCode, hasError: postalCodeInputHasError, valueChangeHandler: postalCodeChangeHandler, inputBlurHandler: postalCodeInputBlurHandler } = useInput(isFive)
 
     useEffect(() => {
         const identifier = setTimeout(() => {
@@ -23,9 +23,9 @@ const AdressForm = ({setFormData, formData}) => {
             })
         }, 1000)
         return () => clearTimeout(identifier)
-        
+
     }, [enteredCity, enteredProvince, enteredPostalCode])
-    
+    console.log('Adress re-render')
     return (
         <>
             <Grid item xs={12} sm={6}>
@@ -44,14 +44,14 @@ const AdressForm = ({setFormData, formData}) => {
             </Grid>
             <Grid item xs={12} sm={6}>
                 <TextField
-                    
+
                     label="Province / Region"
                     variant="outlined"
                     fullWidth
                     size="small"
                     value={enteredProvince}
                     onChange={provinceChangeHandler}
-                    
+
                 />
             </Grid>
             <Grid item xs={6}>
