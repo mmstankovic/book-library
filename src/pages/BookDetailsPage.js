@@ -12,6 +12,7 @@ const BookDetailsPage = () => {
     const { id } = params
 
     const bookLibContext = useContext(LibraryContext)
+    const { fetchBookDetails } = bookLibContext
 
     useEffect(() => {
         const sendRequest = async () => {
@@ -24,14 +25,14 @@ const BookDetailsPage = () => {
             }
             const data = await response.json()
 
-            bookLibContext.fetchBookDetails(data)
+            fetchBookDetails(data)
             setIsLoading(false)
         }
         sendRequest().catch(err => {
             setError(err.message)
             setIsLoading(false)
         })
-    }, [])
+    }, [id, fetchBookDetails])
 
     if (isLoading) {
         return <LoadingSpinner />

@@ -12,9 +12,9 @@ export const LibraryProvider = (props) => {
         setBookItems(booksData)
     }, [])
 
-    const fetchBookDetails = (bookData) => {
+    const fetchBookDetails = useCallback((bookData) => {
         setSelectedBook(bookData)
-    }
+    },[])
 
     const showQuickView = (id) => {
         setSelectedBook(bookItems.find((book) => book.id === id))
