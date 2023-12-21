@@ -10,9 +10,15 @@ import { useContext } from 'react';
 import LibraryContext from '../../store/library-context';
 import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined'
 import cosmicImg from '../../images/cosmic.jpeg'
+import Brightness6Icon from '@mui/icons-material/Brightness6';
 
 const MyDrawer = ({ handleDrawerToggle }) => {
     const bookLibraryCtx = useContext(LibraryContext)
+
+    const toggleThemeModeHandler = () => {
+        bookLibraryCtx.toggleThemeMode()
+    }
+
     return (
         <Box sx={{ height: '100vh', backgroundImage: `url(${cosmicImg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
             <Box onClick={handleDrawerToggle} sx={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
@@ -42,6 +48,9 @@ const MyDrawer = ({ handleDrawerToggle }) => {
                     }}>
                         <ShoppingBagOutlinedIcon color='primary' fontSize='small' />
                     </Badge>
+                </IconButton>
+                <IconButton color='primary' title='Toggle light/dark mode' onClick={toggleThemeModeHandler}>
+                    <Brightness6Icon />
                 </IconButton>
             </Box>
         </Box>

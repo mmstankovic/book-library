@@ -11,7 +11,7 @@ import { useSearchParams } from 'react-router-dom'
 const SearchBook = ({ fetchBooksData }) => {
     const [searchTerm, setSearchTerm] = useState('')
 
-    const [searchParams, setSearchParams] = useSearchParams()//
+    const [searchParams, setSearchParams] = useSearchParams()
     const param = searchParams.get('author')
 
     const valueChangeHandler = (e) => {
@@ -31,7 +31,7 @@ const SearchBook = ({ fetchBooksData }) => {
     }
     return (
         <Container maxWidth='sm'>
-            <FormControl fullWidth variant="outlined" sx={{ my: 5 }}>
+            <FormControl fullWidth variant="outlined" sx={{ my: 5 }} size='small'>
                 <InputLabel>Search for title, author, ISBN, publisher...</InputLabel>
                 <OutlinedInput
                     value={searchTerm}
@@ -43,7 +43,7 @@ const SearchBook = ({ fetchBooksData }) => {
                                 onClick={submitHandler}
                                 edge="end"
                             >
-                                <SearchIcon />
+                                <SearchIcon color='primary'/>
                             </IconButton>
                         </InputAdornment>
                     }

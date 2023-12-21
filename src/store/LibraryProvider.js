@@ -2,11 +2,16 @@ import LibraryContext from './library-context'
 import { useState, useCallback } from 'react'
 
 export const LibraryProvider = (props) => {
+    const [mode, setMode] = useState(true)
     const [bookItems, setBookItems] = useState([])
     const [quickViewIsVisible, setQuickIsVisible] = useState(false)
     const [selectedBook, setSelectedBook] = useState(null)
     const [bag, setBag] = useState([])
     const [bagChanged, setBagChanged] = useState(false)
+
+    const toggleThemeMode = () => {
+        setMode(prevMode => !prevMode)
+    }
 
     const fetchAllBooks = useCallback((booksData) => {
         setBookItems(booksData)
@@ -64,10 +69,12 @@ export const LibraryProvider = (props) => {
     }, [])
 
     const contextValue = {
+        mode,
         bookItems,
         bag,
         selectedBook,
         quickViewIsVisible,
+        toggleThemeMode,
         fetchAllBooks,
         fetchBookDetails,
         showQuickView,

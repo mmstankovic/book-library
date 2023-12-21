@@ -69,8 +69,15 @@ function App() {
 
   const theme = createTheme({
     palette: {
-      background: {
-        default: '#F5F5F5'
+      mode: bookLibContext.mode ? 'dark' : 'light'
+    },
+    components: {
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundImage: "unset"
+          }
+        }
       }
     }
   })

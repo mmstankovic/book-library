@@ -1,10 +1,12 @@
 import React from "react";
 
 const LibraryContext = React.createContext({
+    mode: true,
     bookItems: [],
     bag: [],
     quickViewIsVisible: false,
     selectedBook: null,
+    toggleThemeMode: () => {},
     fetchAllBooks: (data) => {},
     fetchBookDetails: (bookData) => {},
     showQuickView: (bookId) => {},
