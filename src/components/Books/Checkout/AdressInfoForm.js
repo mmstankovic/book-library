@@ -6,15 +6,14 @@ import useInput from '../../../hooks/useInput'
 const isNotEmpty = value => value.trim().length !== 0
 const isFive = value => value.trim().length === 5
 
-const AdressForm = ({ setFormData, formData }) => {
+const AdressForm = ({ onChange }) => {
     const { enteredValue: enteredCity, hasError: cityInputHasError, valueChangeHandler: cityChangeHandler, inputBlurHandler: cityInputBlurHandler } = useInput(isNotEmpty)
     const { enteredValue: enteredProvince, valueChangeHandler: provinceChangeHandler } = useInput(isNotEmpty)
     const { enteredValue: enteredPostalCode, hasError: postalCodeInputHasError, valueChangeHandler: postalCodeChangeHandler, inputBlurHandler: postalCodeInputBlurHandler } = useInput(isFive)
 
     useEffect(() => {
         const identifier = setTimeout(() => {
-            setFormData({
-                ...formData,
+            onChange({
                 adressInfo: {
                     city: enteredCity,
                     province: enteredProvince,
@@ -24,8 +23,8 @@ const AdressForm = ({ setFormData, formData }) => {
         }, 1000)
         return () => clearTimeout(identifier)
 
-    }, [enteredCity, enteredProvince, enteredPostalCode])
-    console.log('Adress re-render')
+    }, [enteredCity, enteredProvince, enteredPostalCode, onChange])
+    
     return (
         <>
             <Grid item xs={12} sm={6}>

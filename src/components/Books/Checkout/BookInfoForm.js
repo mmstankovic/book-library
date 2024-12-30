@@ -5,7 +5,7 @@ import useInput from '../../../hooks/useInput'
 
 const moreThenSix = value => value.trim().length > 6
 
-const BookInfoForm = ({formData, setFormData}) => {
+const BookInfoForm = ({onChange}) => {
     const { enteredValue: enteredName, enteredValueIsValid: nameIsValid, hasError: nameInpuHasError, valueChangeHandler: nameChangeHandler, inputBlurHandler: nameInputBlurHandler } = useInput(moreThenSix)
     const { enteredValue: enteredLibraryId, enteredValueIsValid: libraryIdIsValid, hasError: libraryIdInputHasError, valueChangeHandler: libraryIdChangeHandler, inputBlurHandler: libraryIdInputBlurHandler } = useInput(moreThenSix)
     const { enteredValue: enteredTitle, enteredValueIsValid: titleIsValid, hasError: titleInputHasError, valueChangeHandler: titleChangeHandler, inputBlurHandler: titleInputBlurHandler } = useInput(moreThenSix)
@@ -14,21 +14,18 @@ const BookInfoForm = ({formData, setFormData}) => {
     
     useEffect(() => {
         const bookIdentifier = setTimeout(() => {
-            setFormData({
-                ...formData,
+            onChange({
                 bookInfo: {
                     fullName: enteredName,
                     libraryId: enteredLibraryId,
                     bookTitle: enteredTitle,
-                    bookAuthor: enteredAuthor
-                },
-                bookInfoFilled:bookInfoFilled
+                    bookAuthor: enteredAuthor,
+                    bookInfoFilled
+                }
             })
         }, 1000)
         return () => clearTimeout(bookIdentifier)
-    }, [enteredName, enteredLibraryId, enteredTitle, enteredAuthor])
-
-    console.log('Book re-render')
+    }, [enteredName, enteredLibraryId, enteredTitle, enteredAuthor, bookInfoFilled, onChange])
 
     return (
         <>

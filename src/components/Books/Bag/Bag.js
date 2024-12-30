@@ -48,7 +48,7 @@ const Bag = ({ isLoading, httpError }) => {
           </TableHead>
           <TableBody>
             {bookLibraryCtx.bag.map((book) => (
-              <BagItem key={book.id} id={book.id} image={book.images ? book.images.thumbnail : 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg'} title={book.title} author={book.authors[0]} isbn={(book.isbn && book.isbn[1] && book.isbn[1].identifier) ? book.isbn[1].identifier : 'ISBN not found'} language={getLanguageName(book.language)} />
+              <BagItem key={book.id} id={book.id} image={book.images ? book.images.thumbnail : noImage} title={book.title} author={book.authors[0]} isbn={(book.isbn && book.isbn[1] && book.isbn[1].identifier) ? book.isbn[1].identifier : 'ISBN not found'} language={getLanguageName(book.language)} />
             ))}
           </TableBody>
         </Table>

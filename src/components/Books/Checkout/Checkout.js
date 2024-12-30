@@ -6,24 +6,33 @@ import Paper from '@mui/material/Paper'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button'
-import { useState, useContext } from 'react'
+import { useState, useContext, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import BookInfoForm from './BookInfoForm'
 import AdressInfoForm from './AdressInfoForm'
 import SuccessMessage from '../../UI/SuccessMessage'
 import LibraryContext from '../../../store/library-context'
+import booksStack from '../../../images/books-stack.png'
 
 const Checkout = () => {
     const [isChecked, setIsChecked] = useState(false)
     const [isItAccepted, setIsItAccepted] = useState(false)
     const bookLibraryCtx = useContext(LibraryContext)
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         bookInfo: {},
-        adressInfo: {},
-        bookInfoFilled: false
+        adressInfo: {}
     })
     const [open, setOpen] = useState(false)
-    const handleClose = () => setOpen(false)
+    const handleClose = () => {
+        setOpen(false)
+        navigate('/books')
+    }
+
+    const changeFormDataHandler = useCallback((newData) => {
+        setFormData((prevState) => ({...prevState, ...newData}))
+    },[])
 
     const checkInputHandler = (e) => {
         setIsChecked(prevState => !prevState)
@@ -32,7 +41,7 @@ const Checkout = () => {
         setIsItAccepted(prevAccState => !prevAccState)
     }
 
-    let formIsValid = formData.bookInfoFilled && isItAccepted
+    let formIsValid = formData.bookInfo.bookInfoFilled && isItAccepted
 
     const checkoutHandler = (e) => {
         e.preventDefault()
@@ -50,23 +59,19 @@ const Checkout = () => {
                 libraryId: formData.bookInfo.libraryId,
                 bookAuthor: formData.bookInfo.bookAuthor,
                 bookTitle: formData.bookInfo.bookTitle
-                /*
-                     city: formData.adressInfo.city,
-                    province: formData.adressInfo.province,
-                    postalCode: formData.adressInfo.postalCode
-                */
             })
         })
-            .then((res) => {
-                return res.json()
-            })
-            .then((data) => {
-                if (data.name) {
-                    bookLibraryCtx.resetBag()
-                    setOpen(true)
-                }
-                console.log(data)
-            })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            if (data.name) {
+                bookLibraryCtx.resetBag()
+                setOpen(true)
+                setIsChecked(false)
+            }
+            console.log(data)
+        })
     }
 
     if (open) {
@@ -79,12 +84,12 @@ const Checkout = () => {
                 <Typography variant="h5" align="center" sx={{ mb: 3, letterSpacing: 0.5, color: '#616161' }}>
                     COSMIC LIBRARY CHECKOUT
                 </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <img width='250' src='https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books_23-2149334862.jpg' alt='book stack illustration' />
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom:'1rem' }}>
+                    <img width='250' src={booksStack} alt='book stack illustration' />
                 </Box>
                 <Grid container spacing={3}>
-                    <BookInfoForm formData={formData} setFormData={setFormData} />
-                    {isChecked && <AdressInfoForm formData={formData} setFormData={setFormData} />}
+                    <BookInfoForm onChange={changeFormDataHandler} />
+                    {isChecked && <AdressInfoForm onChange={changeFormDataHandler} />}
                     <Grid item xs={12}>
                         <FormControlLabel
                             value={isChecked}

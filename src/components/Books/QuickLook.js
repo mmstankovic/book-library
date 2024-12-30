@@ -14,6 +14,7 @@ import { getLanguageName } from '../../helper/helper'
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import Stack from '@mui/material/Stack'
 import { Link as RouterLink } from 'react-router-dom'
+import noImage from '../../images/noimage.png'
 
 const QuickLook = () => {
     const bookLibraryCtx = useContext(LibraryContext)
@@ -55,7 +56,7 @@ const QuickLook = () => {
                 <Grid container spacing={{ xs: 2, sm: 2, md: 3 }}>
                     <Grid item xs={3}>
                         <Box>
-                            <img width='100%' src={imageLinks ? imageLinks.thumbnail : 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg'} alt='book cover'/>
+                            <img width='100%' src={imageLinks ? imageLinks.thumbnail : noImage} alt='book cover'/>
                         </Box>
                     </Grid>
                     <Grid item xs={8}>

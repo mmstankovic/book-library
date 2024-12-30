@@ -20,7 +20,7 @@ function App() {
     const fetchBooksFromBag = async () => {
       setIsLoading(true)
       setHttpError(null)
-      const response = await fetch('https://http-star-wars-default-rtdb.firebaseio.com/bags.json')
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL)
       if (!response.ok) {
         throw new Error('Fetch books from bag failed !')
       }
@@ -50,7 +50,7 @@ function App() {
   useEffect(() => {
     const sendBooksToBag = async () => {
       setHttpError(null)
-      const response = await fetch('https://http-star-wars-default-rtdb.firebaseio.com/bags.json', {
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(bookLibContext.bag)
@@ -69,7 +69,10 @@ function App() {
 
   const theme = createTheme({
     palette: {
-      mode: bookLibContext.mode ? 'dark' : 'light'
+      mode: bookLibContext.mode ? 'dark' : 'light',
+      primary: {
+        main: '#1976d2'
+      }
     },
     components: {
       MuiPaper: {

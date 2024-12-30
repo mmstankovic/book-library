@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import Typography from "@mui/material/Typography"
 import Button from '@mui/material/Button'
 import {Link as RouterLink} from 'react-router-dom'
-import emptyBag from '../../../images/emptyBag.jpg'
+import emptyBag from '../../../images/emptyBag.png'
 
 const EmptyBag = () => {
     return (

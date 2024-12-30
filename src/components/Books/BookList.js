@@ -5,6 +5,7 @@ import { useContext, useState } from "react"
 import LibraryContext from '../../store/library-context'
 import Pagination from '@mui/material/Pagination'
 import Box from '@mui/material/Box'
+import noImage from '../../images/noimage.png'
 
 const List = () => {
     const bookLibraryCtx = useContext(LibraryContext)
@@ -24,7 +25,7 @@ const List = () => {
             <Stack sx={{ p: 2 }} divider={<Divider orientation="horizontal" flexItem />}>
                 {
                     currBooks.map((book, index) => (
-                        <BookItem currentPage={currentPage} booksPerPage={booksPerPage} key={index} index={index} id={book.id} authors={book.volumeInfo.authors} categories={book.volumeInfo.categories} description={book.volumeInfo.description} title={book.volumeInfo.title} image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg'} />
+                        <BookItem currentPage={currentPage} booksPerPage={booksPerPage} key={index} index={index} id={book.id} authors={book.volumeInfo.authors} categories={book.volumeInfo.categories} description={book.volumeInfo.description} title={book.volumeInfo.title} image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : noImage} />
                     ))
                 }
             </Stack>

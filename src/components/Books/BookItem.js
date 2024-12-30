@@ -16,19 +16,19 @@ const BookItem = ({authors, categories, title, image, index, id, currentPage, bo
     }
     
     return (
-        <Box sx={{ display: 'flex', alignItems:'center', justifyContent:'space-between' }} py={{sm:0.5}}>
+        <Box sx={{ display: 'flex', alignItems:'center', justifyContent:'space-between' }} py={{xs:0.5, sm:1}}>
             <Box sx={{display:'flex', alignItems:'center'}}>
-                <Box sx={{display:'flex', alignItems:'center', mr:2}}>
-                    <img style={{ maxWidth: '72px' }} src={image} alt='bookcover' />
+                <Box sx={{position:'relative', width:'72px', height:'105px', display:'flex', alignItems:'center', mr:2}}>
+                    <img style={{ width:'100%', height:'100%', objectFit:'cover' }} src={image} alt='bookcover' />
                 </Box>
                 <Box>
-                    <Typography variant='subtitle1' sx={{fontWeight:500}}>
+                    <Typography variant='subtitle1' sx={{fontWeight:500, fontSize:{xs:'14px',sm:'16px'}}}>
                        <Link to={`/books/${id}`} underline='none' component={RouterLink} color='#616161'>{(currentPage === 1 ? (index + 1) : currentPage*(booksPerPage / 2) + (index + 1)) + '. ' + title}</Link>
                     </Typography>
-                    <Typography variant='body2' sx={{fontStyle:'italic', color:'#8C8C8C'}}>
+                    <Typography variant='body2' sx={{fontStyle:'italic', color:'#8C8C8C', fontSize:{xs:'12px',sm:'14px'}}}>
                         {authors ? getElementsOfArray(authors) : 'Authors not found'}
                     </Typography>
-                    <Typography variant='body2' sx={{fontStyle:'italic', color:'#8C8C8C'}}>
+                    <Typography variant='body2' sx={{fontStyle:'italic', color:'#8C8C8C', fontSize:{xs:'12px',sm:'14px'}}}>
                         Categories: {categories ? getElementsOfArray(categories) : 'Categories not found'}
                     </Typography>
                 </Box>

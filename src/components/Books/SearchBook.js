@@ -7,6 +7,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import BookHeading from './BookHeading';
 
 const SearchBook = ({ fetchBooksData }) => {
     const [searchTerm, setSearchTerm] = useState('')
@@ -31,6 +32,7 @@ const SearchBook = ({ fetchBooksData }) => {
     }
     return (
         <Container maxWidth='sm'>
+            <BookHeading />
             <FormControl fullWidth variant="outlined" sx={{ my: 5 }} size='small'>
                 <InputLabel>Search for title, author, ISBN, publisher...</InputLabel>
                 <OutlinedInput
