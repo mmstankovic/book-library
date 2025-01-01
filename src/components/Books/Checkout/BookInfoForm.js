@@ -4,13 +4,14 @@ import { useEffect } from 'react'
 import useInput from '../../../hooks/useInput'
 
 const moreThenSix = value => value.trim().length > 6
+const isEmail = value => value.includes('@')
 
 const BookInfoForm = ({onChange}) => {
     const { enteredValue: enteredName, enteredValueIsValid: nameIsValid, hasError: nameInpuHasError, valueChangeHandler: nameChangeHandler, inputBlurHandler: nameInputBlurHandler } = useInput(moreThenSix)
     const { enteredValue: enteredLibraryId, enteredValueIsValid: libraryIdIsValid, hasError: libraryIdInputHasError, valueChangeHandler: libraryIdChangeHandler, inputBlurHandler: libraryIdInputBlurHandler } = useInput(moreThenSix)
-    const { enteredValue: enteredTitle, enteredValueIsValid: titleIsValid, hasError: titleInputHasError, valueChangeHandler: titleChangeHandler, inputBlurHandler: titleInputBlurHandler } = useInput(moreThenSix)
-    const { enteredValue: enteredAuthor, enteredValueIsValid: authorIsValid, hasError: authorInputHasError, valueChangeHandler: authorChangeHandler, inputBlurHandler: authorInputBlurHandler } = useInput((value) => value.trim().length !== 0)
-    let bookInfoFilled = nameIsValid && libraryIdIsValid && titleIsValid && authorIsValid
+    const { enteredValue: enteredEmail, enteredValueIsValid: emailIsValid, hasError: emailInputHasError, valueChangeHandler: emailChangeHandler, inputBlurHandler: emailInputBlurHandler } = useInput(isEmail)
+    const { enteredValue: enteredPhoneNum, enteredValueIsValid: phoneNumIsValid, hasError: phoneNumInputHasError, valueChangeHandler: phoneNumChangeHandler, inputBlurHandler: phoneNumInputBlurHandler } = useInput(moreThenSix)
+    let bookInfoFilled = nameIsValid && libraryIdIsValid && emailIsValid && phoneNumIsValid
     
     useEffect(() => {
         const bookIdentifier = setTimeout(() => {
@@ -18,14 +19,14 @@ const BookInfoForm = ({onChange}) => {
                 bookInfo: {
                     fullName: enteredName,
                     libraryId: enteredLibraryId,
-                    bookTitle: enteredTitle,
-                    bookAuthor: enteredAuthor,
+                    email: enteredEmail,
+                    phoneNumber: enteredPhoneNum,
                     bookInfoFilled
                 }
             })
         }, 1000)
         return () => clearTimeout(bookIdentifier)
-    }, [enteredName, enteredLibraryId, enteredTitle, enteredAuthor, bookInfoFilled, onChange])
+    }, [enteredName, enteredLibraryId, enteredEmail, enteredPhoneNum, bookInfoFilled, onChange])
 
     return (
         <>
@@ -33,57 +34,56 @@ const BookInfoForm = ({onChange}) => {
                 <TextField
                     error={nameInpuHasError}
                     required
-                    label="Fullname"
+                    label="Full Name"
                     variant="outlined"
                     fullWidth
                     size="small"
                     value={enteredName}
                     onChange={nameChangeHandler}
                     onBlur={nameInputBlurHandler}
-                    helperText={nameInpuHasError && 'Please enter your fullname.'}
+                    helperText={nameInpuHasError && 'Please enter your full name.'}
                 />
             </Grid>
-
             <Grid item xs={12} sm={6}>
                 <TextField
                     error={libraryIdInputHasError}
                     required
-                    label="Library Id"
+                    label="Member ID"
                     variant="outlined"
                     fullWidth
                     size="small"
                     value={enteredLibraryId}
                     onChange={libraryIdChangeHandler}
                     onBlur={libraryIdInputBlurHandler}
-                    helperText={libraryIdInputHasError && 'Please enter your library Id.'}
+                    helperText={libraryIdInputHasError && 'Please enter your member id.'}
                 />
             </Grid>
             <Grid item xs={12}>
                 <TextField
-                    error={titleInputHasError}
+                    error={emailInputHasError}
                     required
-                    label="Title of Book"
+                    label="Email"
                     variant="outlined"
                     fullWidth
                     size="small"
-                    value={enteredTitle}
-                    onChange={titleChangeHandler}
-                    onBlur={titleInputBlurHandler}
-                    helperText={titleInputHasError && 'Please enter title of book.'}
+                    value={enteredEmail}
+                    onChange={emailChangeHandler}
+                    onBlur={emailInputBlurHandler}
+                    helperText={emailInputHasError && 'Please enter your email address.'}
                 />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
                 <TextField
-                    error={authorInputHasError}
+                    error={phoneNumInputHasError}
                     required
-                    label="Author of Book"
+                    label="Phone Number"
                     variant="outlined"
                     fullWidth
                     size="small"
-                    value={enteredAuthor}
-                    onChange={authorChangeHandler}
-                    onBlur={authorInputBlurHandler}
-                    helperText={authorInputHasError && 'Please enter author of book.'}
+                    value={enteredPhoneNum}
+                    onChange={phoneNumChangeHandler}
+                    onBlur={phoneNumInputBlurHandler}
+                    helperText={phoneNumInputHasError && 'Please enter your phone number.'}
                 />
             </Grid>
         </>

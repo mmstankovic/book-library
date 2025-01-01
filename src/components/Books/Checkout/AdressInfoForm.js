@@ -8,7 +8,7 @@ const isFive = value => value.trim().length === 5
 
 const AdressForm = ({ onChange }) => {
     const { enteredValue: enteredCity, hasError: cityInputHasError, valueChangeHandler: cityChangeHandler, inputBlurHandler: cityInputBlurHandler } = useInput(isNotEmpty)
-    const { enteredValue: enteredProvince, valueChangeHandler: provinceChangeHandler } = useInput(isNotEmpty)
+    const { enteredValue: enteredAddress, hasError: addressInputHasError, valueChangeHandler: addressChangeHandler, inputBlurHandler: addressInputBlurHandler } = useInput(isNotEmpty)
     const { enteredValue: enteredPostalCode, hasError: postalCodeInputHasError, valueChangeHandler: postalCodeChangeHandler, inputBlurHandler: postalCodeInputBlurHandler } = useInput(isFive)
 
     useEffect(() => {
@@ -16,14 +16,14 @@ const AdressForm = ({ onChange }) => {
             onChange({
                 adressInfo: {
                     city: enteredCity,
-                    province: enteredProvince,
+                    address: enteredAddress,
                     postalCode: enteredPostalCode
                 }
             })
         }, 1000)
         return () => clearTimeout(identifier)
 
-    }, [enteredCity, enteredProvince, enteredPostalCode, onChange])
+    }, [enteredCity, enteredAddress, enteredPostalCode, onChange])
     
     return (
         <>
@@ -38,19 +38,21 @@ const AdressForm = ({ onChange }) => {
                     value={enteredCity}
                     onChange={cityChangeHandler}
                     onBlur={cityInputBlurHandler}
-                    helperText={cityInputHasError && 'Please enter a City.'}
+                    helperText={cityInputHasError && 'Please enter a city.'}
                 />
             </Grid>
             <Grid item xs={12} sm={6}>
                 <TextField
-
-                    label="Province / Region"
+                    required
+                    error={addressInputHasError}
+                    label="Address"
                     variant="outlined"
                     fullWidth
                     size="small"
-                    value={enteredProvince}
-                    onChange={provinceChangeHandler}
-
+                    value={enteredAddress}
+                    onChange={addressChangeHandler}
+                    onBlur={addressInputBlurHandler}
+                    helperText={addressInputHasError && 'Please enter an address'}
                 />
             </Grid>
             <Grid item xs={6}>
@@ -64,7 +66,7 @@ const AdressForm = ({ onChange }) => {
                     value={enteredPostalCode}
                     onChange={postalCodeChangeHandler}
                     onBlur={postalCodeInputBlurHandler}
-                    helperText={postalCodeInputHasError && 'Please enter a valid City.'}
+                    helperText={postalCodeInputHasError && 'Please enter a valid postal code.'}
                 />
             </Grid>
         </>

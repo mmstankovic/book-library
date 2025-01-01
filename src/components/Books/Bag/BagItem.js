@@ -17,7 +17,9 @@ const BagItem = ({id, image, title, author, isbn, language}) => {
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
       >
         <TableCell component="th" scope="row" sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <img height='100' src={image} alt='bookcover' />
+          <Box sx={{position:'relative', width:'72px', height:'105px'}}>
+            <img style={{width:'100%', height:'100%',objectFit:'cover'}} src={image} alt='bookcover' />
+          </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{fontWeight:500, fontStyle:'italic', color:'#616161'}}>{title}</span>
             <span style={{fontStyle:'italic', color:'#8C8C8C'}}>{author}</span>

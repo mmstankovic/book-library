@@ -9,7 +9,7 @@ import LibraryContext from '../../store/library-context'
 import Rating from '@mui/material/Rating';
 import Chip from '@mui/material/Chip';
 import { Link as RouterLink } from 'react-router-dom'
-import { getLanguageName, getElementsOfArray, checkIfItIsBorrowed } from '../../helper/helper'
+import { getLanguageName, checkIfItIsBorrowed } from '../../helper/helper'
 import noImage from '../../images/noimage.png'
 
 const Details = () => {
@@ -51,7 +51,7 @@ const Details = () => {
                     <Typography variant='body2' color='#616161'>
                         <strong>Pages:</strong> {pageCount}
                     </Typography>
-                    <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+                    <Box sx={{ display: 'flex', flexDirection:'column', gap: 1, my: 3 }}>
                         <Typography variant='body2' color='#616161'><strong>Categories:</strong></Typography>
                         {categories ? (<Stack direction='row' spacing={1} useFlexGap flexWrap='wrap'>
                             {categories.map((category) => (
@@ -59,8 +59,8 @@ const Details = () => {
                             ))}
                         </Stack>) : <Typography variant='body2'>Categories not found</Typography>}
                     </Box>
-                    <Button component={RouterLink} to='/books' size='medium' variant='outlined' sx={{ textTransform: 'none', borderRadius: 999, mr: 1 }}>Back</Button>
-                    <Button size='medium' variant='contained' disabled={borrowed} sx={{ borderRadius: 50, textTransform: 'none' }} onClick={() => addBookToBagHandler(id)}>{borrowed ? 'Borrowed' : 'Borrow'}</Button>
+                    <Button component={RouterLink} to='/books' variant='outlined' sx={{ textTransform: 'none', borderRadius: 999, mr: 1, minWidth:'5rem' }}>Back</Button>
+                    <Button variant='contained' disabled={borrowed} sx={{ borderRadius: 50, textTransform: 'none', minWidth:'5rem' }} onClick={() => addBookToBagHandler(id)}>{borrowed ? 'Borrowed' : 'Borrow'}</Button>
                 </Grid>
             </Grid>
         </Container>

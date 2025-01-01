@@ -52,7 +52,7 @@ const QuickLook = () => {
             >
                 <CloseIcon />
             </IconButton>
-            <DialogContent sx={{ display: 'flex', gap: 2, p: 2, }}>
+            <DialogContent sx={{ display: 'flex', gap: 2, p:{xs:'10px',sm:'16px'}}}>
                 <Grid container spacing={{ xs: 2, sm: 2, md: 3 }}>
                     <Grid item xs={3}>
                         <Box>
@@ -61,30 +61,24 @@ const QuickLook = () => {
                     </Grid>
                     <Grid item xs={8}>
                         <Box>
-
                             <Typography variant='h6' sx={{ fontWeight: 600 }} gutterBottom>
                                 <Link underline="none" to={`/books/${id}`} component={RouterLink}>{title} <ArrowForwardIosRoundedIcon fontSize='small' sx={{ verticalAlign: 'middle' }} /></Link>
                             </Typography>
-
-
                             <Typography sx={{ color: '#8C8C8C' }} mb={{ xs: 0.5, sm: 1 }} variant="body2">
                                 Categories: {categories ? (categories.map((category, i) => <span key={category}>{category}{categories.length - 1 === i ? '' : ','} </span>)) : 'Categories not found'}
                             </Typography>
                             <Typography sx={{ color: '#8C8C8C' }} mb={{ xs: 0.5, sm: 1 }} variant="body2">
                                 Language: {getLanguageName(language)}
                             </Typography>
-
                             <Typography sx={{ color: '#8C8C8C' }} mb={{ xs: 0.5, sm: 1 }} variant="body2">
                                 Year: {year}
                             </Typography>
-
-
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
                         <Box sx={{ mb: 2 }}>
                             <Typography variant='body2' sx={{ color: '#8C8C8C' }} gutterBottom>
-                                {`${description ? description.split('.', 1)[0] : 'Description not found'}.`}
+                                {`${description ? (description.length > 200 ? `${description.substring(0, 200)}...` : description) : 'Description not found'}.`}
                             </Typography>
                         </Box>
                         <Typography variant='subtitle2' sx={{ color: '#8C8C8C' }} gutterBottom>
@@ -99,7 +93,6 @@ const QuickLook = () => {
                                 ))) : <Typography variant='subtitle2' sx={{ color: '#ff9800' }}>Authors not found</Typography>}
                             </Stack>
                         </Box>
-
                     </Grid>
                 </Grid>
             </DialogContent>
@@ -107,11 +100,12 @@ const QuickLook = () => {
                 <Button onClick={() => addBookToBagHandler(id)} disabled={!!borrowed} sx={{
                     '&.Mui-disabled': {
                         color: '#fff'
-                    }
+                    },
+                    p:{xs:0, sm:'6px 8px'}
                 }}>
                     {borrowed ? 'Borrowed' : 'Borrow'}
                 </Button>
-                <Button onClick={bookLibraryCtx.hideQuickView}>
+                <Button onClick={bookLibraryCtx.hideQuickView} sx={{p:{xs:0, sm:'6px 8px'}}}>
                     Cancel
                 </Button>
             </DialogActions>
@@ -119,4 +113,3 @@ const QuickLook = () => {
     )
 }
 export default QuickLook
-//(category,i) => <span>{category}{ multipleCategories.length - 1 === i ? '' : ','} </span>

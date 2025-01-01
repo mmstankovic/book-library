@@ -57,8 +57,8 @@ const Checkout = () => {
                 id: Math.floor(Math.random() * 1000) + 1,
                 name: formData.bookInfo.fullName,
                 libraryId: formData.bookInfo.libraryId,
-                bookAuthor: formData.bookInfo.bookAuthor,
-                bookTitle: formData.bookInfo.bookTitle
+                email: formData.bookInfo.email,
+                phoneNumber: formData.bookInfo.phoneNumber
             })
         })
         .then((res) => {
